@@ -1,12 +1,9 @@
 package com.exercicio.folha.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
-import java.time.LocalDate;
 
 @Entity
 @Table (name = "Movimento_TB")
@@ -21,8 +18,8 @@ public class MovimentoModel extends AtividadeModel {
     public MovimentoModel() {
     }
 
-    public MovimentoModel(Integer codigoEmpresa, Integer codigoEmpregado, LocalDate dataCompetencia, Integer codigoEvento, Double valorInformado, Character tipoMovimento, Double valorCalculado) {
-        super(codigoEmpresa, codigoEmpregado, dataCompetencia, codigoEvento, valorInformado);
+    public MovimentoModel(AtividadePK codigoAtividade, Double valorInformado, Character tipoMovimento, Double valorCalculado) {
+        super(codigoAtividade, valorInformado);
         this.tipoMovimento = tipoMovimento;
         this.valorCalculado = valorCalculado;
     }

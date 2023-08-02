@@ -1,8 +1,6 @@
 package com.exercicio.folha.controllers;
 
-import com.exercicio.folha.models.LancamentosModel;
 import com.exercicio.folha.models.MovimentoModel;
-import com.exercicio.folha.services.LancamentosService;
 import com.exercicio.folha.services.MovimentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/movimento")
 public class MovimentoController {
+
     @Autowired
     private MovimentoService servicoMovimento;
 

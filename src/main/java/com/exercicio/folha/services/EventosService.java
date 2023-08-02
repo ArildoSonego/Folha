@@ -20,4 +20,8 @@ public class EventosService {
         eventos.save (eventoNovo);
     }
 
+    public void altera (EventosModel eventoExistente) {
+        eventos.save (eventoExistente);
+    }
+
 }

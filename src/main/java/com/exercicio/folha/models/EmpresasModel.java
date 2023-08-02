@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Table(name= "Empresas_TB")
 public class EmpresasModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column (name = "codi_emp")
     private Integer codigoEmpresa;
 

@@ -12,7 +12,8 @@ public class LancamentosModel extends AtividadeModel{
     public LancamentosModel() {
     }
 
-    public LancamentosModel(Integer codigoEmpresa, Integer codigoEmpregado, LocalDate dataCompetencia, Integer codigoEvento, Double valorInformado) {
-        super(codigoEmpresa, codigoEmpregado, dataCompetencia, codigoEvento, valorInformado);
+    public LancamentosModel(AtividadePK codigoAtividade, Double valorInformado) {
+        super(codigoAtividade, valorInformado);
     }
+
 }

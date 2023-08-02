@@ -4,16 +4,12 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table (name = "Eventos_TB",uniqueConstraints = {@UniqueConstraint(columnNames = {"codi_emp","i_eventos"})})
+@Table (name = "Eventos_TB")
+
 public class EventosModel {
 
-    @ManyToOne
-    @JoinColumn (name = "codi_emp", nullable = false)
-    private EmpresasModel codigoEmpresa;
-
-    @Id
-    @Column(name = "i_eventos", nullable = false)
-    private Integer codigoEvento;
+    @EmbeddedId
+    private EventosPK eventoID;
 
     @Column(name = "nome", nullable = false, length = 50)
     private String descricaoEvento;
@@ -48,9 +44,8 @@ public class EventosModel {
     public EventosModel() {
     }
 
-    public EventosModel(EmpresasModel codigoEmpresa, Integer codigoEvento, String descricaoEvento, Character tipoEvento, Character unidadeEvento, Character compoeLiquido, Character somaBaseINSS, Character somaBaseFGTS, Character somaBaseIRRF, Character somaBase_HoraExtra, Integer baseCalculo, Double taxaBase) {
-        this.codigoEmpresa = codigoEmpresa;
-        this.codigoEvento = codigoEvento;
+    public EventosModel(EventosPK eventoID, String descricaoEvento, Character tipoEvento, Character unidadeEvento, Character compoeLiquido, Character somaBaseINSS, Character somaBaseFGTS, Character somaBaseIRRF, Character somaBase_HoraExtra, Integer baseCalculo, Double taxaBase) {
+        this.eventoID = eventoID;
         this.descricaoEvento = descricaoEvento;
         this.tipoEvento = tipoEvento;
         this.unidadeEvento = unidadeEvento;
@@ -63,20 +58,12 @@ public class EventosModel {
         this.taxaBase = taxaBase;
     }
 
-    public EmpresasModel getCodigoEmpresa() {
-        return codigoEmpresa;
+    public EventosPK getEventoID() {
+        return eventoID;
     }
 
-    public void setCodigoEmpresa(EmpresasModel codigoEmpresa) {
-        this.codigoEmpresa = codigoEmpresa;
-    }
-
-    public Integer getCodigoEvento() {
-        return codigoEvento;
-    }
-
-    public void setCodigoEvento(Integer codigoEvento) {
-        this.codigoEvento = codigoEvento;
+    public void setEventoID(EventosPK eventoID) {
+        this.eventoID = eventoID;
     }
 
     public String getDescricaoEvento() {

@@ -10,13 +10,8 @@ import java.time.LocalDate;
 @Table (name = "TabelaIrrf_TB", uniqueConstraints = {@UniqueConstraint(columnNames = {"i_tabcalcirrf","valor_ate"})})
 public class TabelaIrrfModel {
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Id
-    @Column(name = "i_tabcalcirrf", nullable = false)
-    private LocalDate codigoTabelaIRRF;
-
-    @Column (name = "valor_ate")
-    private Double valorLimite;
+    @EmbeddedId
+    private TabelaIrrfPK tabelaIrrfID;
 
     @Column (name = "taxa")
     private Double taxaIRRF;
@@ -27,27 +22,18 @@ public class TabelaIrrfModel {
     public TabelaIrrfModel() {
     }
 
-    public TabelaIrrfModel(LocalDate codigoTabelaIRRF, Double valorLimite, Double taxaIRRF, Double descontoIRRF) {
-        this.codigoTabelaIRRF = codigoTabelaIRRF;
-        this.valorLimite = valorLimite;
+    public TabelaIrrfModel(TabelaIrrfPK tabelaIrrfID, Double taxaIRRF, Double descontoIRRF) {
+        this.tabelaIrrfID = tabelaIrrfID;
         this.taxaIRRF = taxaIRRF;
         this.descontoIRRF = descontoIRRF;
     }
 
-    public LocalDate getCodigoTabelaIRRF() {
-        return codigoTabelaIRRF;
+    public TabelaIrrfPK getTabelaIrrfID() {
+        return tabelaIrrfID;
     }
 
-    public void setCodigoTabelaIRRF(LocalDate codigoTabelaIRRF) {
-        this.codigoTabelaIRRF = codigoTabelaIRRF;
-    }
-
-    public Double getValorLimite() {
-        return valorLimite;
-    }
-
-    public void setValorLimite(Double valorLimite) {
-        this.valorLimite = valorLimite;
+    public void setTabelaIrrfID(TabelaIrrfPK tabelaIrrfID) {
+        this.tabelaIrrfID = tabelaIrrfID;
     }
 
     public Double getTaxaIRRF() {

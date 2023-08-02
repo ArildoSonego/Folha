@@ -6,17 +6,11 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table (name = "Empregados_TB",uniqueConstraints = {@UniqueConstraint(columnNames = {"codi_emp","i_empregados"})})
+@Table (name = "Empregados_TB")
 public class EmpregadosModel {
 
-    @ManyToOne
-    @JoinColumn (name = "codi_emp", nullable = false)
-    private EmpresasModel codigoEmpresa;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column (name= "i_empregados", nullable = false)
-    private Integer codigoEmpregado;
+    @EmbeddedId
+    private EmpregadosPK empregadoID;
 
     @Column (name = "nome", nullable = false, length = 60)
     private String nomeEmpregado;
@@ -31,20 +25,19 @@ public class EmpregadosModel {
     public EmpregadosModel() {
     }
 
-    public EmpresasModel getCodigoEmpresa() {
-        return codigoEmpresa;
+    public EmpregadosModel(EmpregadosPK empregadoID, String nomeEmpregado, LocalDate dataAdmissao, Double salarioEmpregado) {
+        this.empregadoID = empregadoID;
+        this.nomeEmpregado = nomeEmpregado;
+        this.dataAdmissao = dataAdmissao;
+        this.salarioEmpregado = salarioEmpregado;
     }
 
-    public void setCodigoEmpresa(EmpresasModel codigoEmpresa) {
-        this.codigoEmpresa = codigoEmpresa;
+    public EmpregadosPK getEmpregadoID() {
+        return empregadoID;
     }
 
-    public Integer getCodigoEmpregado() {
-        return codigoEmpregado;
-    }
-
-    public void setCodigoEmpregado(Integer codigoEmpregado) {
-        this.codigoEmpregado = codigoEmpregado;
+    public void setEmpregadoID(EmpregadosPK empregadoID) {
+        this.empregadoID = empregadoID;
     }
 
     public String getNomeEmpregado() {
