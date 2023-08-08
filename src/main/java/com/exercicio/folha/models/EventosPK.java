@@ -11,7 +11,6 @@ public class EventosPK {
     @JoinColumn(name = "codi_emp", nullable = false)
     private EmpresasModel codigoEmpresa;
 
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column (name= "i_eventos", nullable = false)
     private Integer codigoEvento;
 

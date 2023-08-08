@@ -33,7 +33,7 @@ public class EventosModel {
     private Character somaBaseIRRF;
 
     @Column(name = "soma_base_hextra", nullable = false)
-    private Character somaBase_HoraExtra;
+    private Character somaBaseHoraExtra;
 
     @Column (name = "base_calculo")
     private Integer baseCalculo;
@@ -44,7 +44,7 @@ public class EventosModel {
     public EventosModel() {
     }
 
-    public EventosModel(EventosPK eventoID, String descricaoEvento, Character tipoEvento, Character unidadeEvento, Character compoeLiquido, Character somaBaseINSS, Character somaBaseFGTS, Character somaBaseIRRF, Character somaBase_HoraExtra, Integer baseCalculo, Double taxaBase) {
+    public EventosModel(EventosPK eventoID, String descricaoEvento, Character tipoEvento, Character unidadeEvento, Character compoeLiquido, Character somaBaseINSS, Character somaBaseFGTS, Character somaBaseIRRF, Character somaBaseHoraExtra, Integer baseCalculo, Double taxaBase) {
         this.eventoID = eventoID;
         this.descricaoEvento = descricaoEvento;
         this.tipoEvento = tipoEvento;
@@ -53,7 +53,7 @@ public class EventosModel {
         this.somaBaseINSS = somaBaseINSS;
         this.somaBaseFGTS = somaBaseFGTS;
         this.somaBaseIRRF = somaBaseIRRF;
-        this.somaBase_HoraExtra = somaBase_HoraExtra;
+        this.somaBaseHoraExtra = somaBaseHoraExtra;
         this.baseCalculo = baseCalculo;
         this.taxaBase = taxaBase;
     }
@@ -122,15 +122,15 @@ public class EventosModel {
         this.somaBaseIRRF = somaBaseIRRF;
     }
 
-    public Character getSomaBase_HoraExtra() {
-        return somaBase_HoraExtra;
+    public Character getSomaBaseHoraExtra() {
+        return somaBaseHoraExtra;
     }
 
-    public void setSomaBase_HoraExtra(Character somaBase_HoraExtra) {
-        this.somaBase_HoraExtra = somaBase_HoraExtra;
+    public void setSomaBaseHoraExtra(Character somaBaseHoraExtra) {
+        this.somaBaseHoraExtra = somaBaseHoraExtra;
     }
 
-    public Integer getBaseCalculo() {
+    public Integer gtBaseCalculo() {
         return baseCalculo;
     }
 

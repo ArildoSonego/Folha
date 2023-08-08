@@ -12,12 +12,21 @@ public class LancamentosService {
     @Autowired
     LancamentosRepository lancamentos;
 
+
     public List<LancamentosModel> buscaTodos() {
         return lancamentos.findAll();
     }
+
 
     public void inclui (LancamentosModel lancamentoNovo) {
         lancamentos.save (lancamentoNovo);
     }
 
+    public void exclui (LancamentosModel lancamentoExistente){
+        lancamentos.deleteById(lancamentoExistente.getSequencial());
+    }
+
+    public boolean existe (LancamentosModel lancamentoExistente){
+        return lancamentos.existsById(lancamentoExistente.getSequencial());
+    }
 }
