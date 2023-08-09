@@ -67,15 +67,10 @@ public class CalculoFolhaController {
         if (!servicoEmpregados.existe(empregadoID))
             return new ResponseEntity<>("Empregado inválido nesta empresa.", HttpStatus.NOT_FOUND);
 
-       // verifica se existem lancamentos para o empregado na competencia indicada
+        // realiza o calculo da folha
         List<LancamentosModel> lancamentosPeriodo = calculo.buscaLancamentos(registroID.codEmpresa(), registroID.empregadoID(), registroID.competenciaID());
-        if (lancamentosPeriodo.isEmpty())
-            return new ResponseEntity<>("Nenhum lançamento encontrado para o empregado na competência informada.", HttpStatus.NOT_FOUND);
-
-        String resultado = "Cálculo executado com sucesso.";
-        HttpStatus statusHTTP = HttpStatus.OK;
-        servicoCalculo.calculoIndividual(lancamentosPeriodo,resultado, statusHTTP,registroID);
-        return new ResponseEntity<>(resultado, statusHTTP);
+        servicoCalculo.calculoIndividual(lancamentosPeriodo,registroID);
+        return new ResponseEntity<>("Cálculo executado com sucesso.",HttpStatus.OK);
     }
 }
 
