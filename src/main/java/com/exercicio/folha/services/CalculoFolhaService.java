@@ -99,12 +99,11 @@ public class CalculoFolhaService {
                 double totalHorasExtras = (baseHoraExtra / 220) * l.getValorInformado() * (eventoCadastrado.getTaxaBase() / 100);
                 valorConsiderado = totalHorasExtras;
             } else if (l.getCodigoEvento() == 996) { // FGTS
-
+                valorConsiderado = l.getValorInformado();
             } else if (l.getCodigoEvento() == 998) { // INSS
-
-
+                valorConsiderado = l.getValorInformado();
             } else if (l.getCodigoEvento() == 999) { // IRRF
-
+                valorConsiderado = l.getValorInformado();
             }
 
             System.out.printf("%,8.2f\n", valorConsiderado);
@@ -211,16 +210,17 @@ public class CalculoFolhaService {
                 irrfBase += valorConsiderado * multiplicador;
             }
         }
-            // busca o indice de desconto na tabela
-            List <TabelaIrrfModel> faixaIRRF = servicoIRRF.trazTabelaIRRF(registroID.competenciaID());
-            for (TabelaIrrfModel t : faixaIRRF) {
-                TabelaIrrfPK limiteValor = t.getTabelaIrrfID();
-                if (irrfBase <= limiteValor.getValorLimite()) {
+        // busca o indice de desconto na tabela
+        List <TabelaIrrfModel> faixaIRRF = servicoIRRF.buscaTabelaIRRF();
+        double valorAnterior = -1.0;
+        for (TabelaIrrfModel t : faixaIRRF) {
+                if (!registroID.competenciaID().isBefore(t.getTabelaIrrfID().getCodigoTabelaIRRF()) && (irrfBase > valorAnterior ) && (irrfBase <= t.getTabelaIrrfID().getValorLimite())) {
                     irrfTaxa = t.getTaxaIRRF();
                     irrfDesconto = t.getDescontoIRRF();
                 }
-            }
-    return (irrfBase * irrfTaxa / 100 - irrfDesconto);
+                valorAnterior = t.getTabelaIrrfID().getValorLimite();
+        }
+        return (irrfBase * irrfTaxa / 100 - irrfDesconto);
     }
 
     private double calculaINSS (EventosRepository servicoEventos,TabelaInssRepository servicoINSS, List <LancamentosModel> listaLancamento, double salarioHora, CalculoFolhaDto registroID) {
@@ -247,11 +247,12 @@ public class CalculoFolhaService {
         }
 
         // busca o indice de desconto na tabela
-        List <TabelaInssModel> faixaINSS = servicoINSS.trazTabelaINSS(registroID.competenciaID());
+        List <TabelaInssModel> faixaINSS = servicoINSS.buscaTabelaINSS();
+        double valorAnterior = -1.0;
         for (TabelaInssModel t : faixaINSS) {
-            TabelaInssPK limiteValor = t.getTabelaInssID();
-            if (inssBase <= limiteValor.getValorLimite())
+            if (!registroID.competenciaID().isBefore(t.getTabelaInssID().getCodigoTabelaINSS()) && (inssBase > valorAnterior ) && (inssBase <= t.getTabelaInssID().getValorLimite()))
                 inssTaxa = t.getTaxaINSS();
+            valorAnterior = t.getTabelaInssID().getValorLimite();
         }
         return (inssBase * inssTaxa / 100);
     }

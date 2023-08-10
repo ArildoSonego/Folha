@@ -115,6 +115,7 @@ public class EmpresasService {
         eventoNovo.setBaseCalculo(4);
         eventoNovo.setTaxaBase(100.00);
         eventos.save(eventoNovo);
+
     }
 
     public boolean existe (Integer empresaID) {return empresas.existsById(empresaID);}

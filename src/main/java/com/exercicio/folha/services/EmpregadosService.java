@@ -17,10 +17,6 @@ public class EmpregadosService {
     @Autowired
     EmpregadosRepository empregados;
 
-    public List<EmpregadosModel> buscaTodos() {
-        return empregados.findAll();
-    }
-
     public void inclui (EmpregadosModel empregadoNovo) {
         empregados.save (empregadoNovo);
     }

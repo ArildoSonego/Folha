@@ -3,6 +3,7 @@ package com.exercicio.folha.controllers;
 import com.exercicio.folha.models.EmpregadosModel;
 import com.exercicio.folha.models.EmpregadosPK;
 import com.exercicio.folha.models.EmpresasModel;
+import com.exercicio.folha.repositories.EmpregadosRepository;
 import com.exercicio.folha.services.EmpregadosService;
 import com.exercicio.folha.services.EmpresasService;
 import org.jetbrains.annotations.NotNull;
@@ -21,11 +22,14 @@ public class EmpregadosController {
     private EmpregadosService servicoEmpregados;
 
     @Autowired
+    private EmpregadosRepository empregadosEmpresa;
+
+    @Autowired
     private EmpresasService servicoEmpresas;
 
-    @GetMapping (value = "/todos")
-    public ResponseEntity <List<EmpregadosModel>> buscaTodosEmpregados() {
-        return new ResponseEntity<>(servicoEmpregados.buscaTodos(), HttpStatus.OK);
+    @GetMapping (value = "/todos/{empresaID}")
+    public ResponseEntity <List<EmpregadosModel>> buscaTodosEmpregados(@PathVariable int empresaID) {
+        return new ResponseEntity<>(empregadosEmpresa.buscaTodos(empresaID), HttpStatus.OK);
     }
 
     @GetMapping (value = "/especifico")
@@ -50,5 +54,4 @@ public class EmpregadosController {
         else
             return new ResponseEntity<>("Empresa não cadastrada.",HttpStatus.NOT_FOUND);
     }
-
 }
