@@ -19,7 +19,10 @@ public class BaseServicosService {
     }
 
     public void inclui (BaseServicosModel baseservicosNova) {
-        baseservicos.save (baseservicosNova);
+         baseservicos.save (baseservicosNova);
     }
 
+    public void altera (BaseServicosModel baseservicosExistente) {
+        baseservicos.save (baseservicosExistente);
+    }
 }

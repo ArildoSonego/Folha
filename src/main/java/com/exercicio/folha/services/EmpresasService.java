@@ -5,7 +5,6 @@ import com.exercicio.folha.models.EventosModel;
 import com.exercicio.folha.models.EventosPK;
 import com.exercicio.folha.repositories.EmpresasRepository;
 import com.exercicio.folha.repositories.EventosRepository;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

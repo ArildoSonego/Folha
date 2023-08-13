@@ -1,7 +1,7 @@
 package com.exercicio.folha.controllers;
 
 import com.exercicio.folha.models.EventosModel;
-
+import com.exercicio.folha.repositories.EventosRepository;
 import com.exercicio.folha.services.EventosService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,9 +21,12 @@ public class EventosController {
     @Autowired
     private EventosService servicoEventos;
 
-    @GetMapping
-    public ResponseEntity <List<EventosModel>> buscaTodosEventos() {
-        return new ResponseEntity<>(servicoEventos.buscaTodos(), HttpStatus.OK);
+    @Autowired
+    private EventosRepository eventosEmpresa;
+
+    @GetMapping (value = "/todos/{empresaID}")
+    public ResponseEntity <List<EventosModel>> buscaTodosEventos(@PathVariable int empresaID) {
+        return new ResponseEntity<>(eventosEmpresa.buscaTodos(empresaID), HttpStatus.OK);
     }
 
     @PutMapping (value="/{avisoAlteracao}")

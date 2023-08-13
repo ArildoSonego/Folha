@@ -52,8 +52,16 @@ public class LancamentosController {
         EmpregadosModel empregadoID = new EmpregadosModel();
         empregadoID = servicoEmpregados.buscaUm(empregadoPK);
         LocalDate admissaoEmpregado = empregadoID.getDataAdmissao();
-        if (dataLancamento.isBefore(admissaoEmpregado))
-            return new ResponseEntity<>("A competência do lançamento é anterior ao mês de admissão do empregado.", HttpStatus.NOT_ACCEPTABLE);
+        int anoEmpregado = admissaoEmpregado.getYear();
+        int anoLancamento = dataLancamento.getYear();
+        if (anoLancamento < anoEmpregado)
+             return new ResponseEntity<>("A competência do lançamento é anterior ao mês de admissão do empregado.", HttpStatus.NOT_ACCEPTABLE);
+        else{
+            int mesEmpregado = admissaoEmpregado.getMonthValue();
+            int mesLancamento = dataLancamento.getMonthValue();
+            if (mesLancamento < mesEmpregado)
+                return new ResponseEntity<>("A competência do lançamento é anterior ao mês de admissão do empregado.", HttpStatus.NOT_ACCEPTABLE);
+        }
 
         // verifica a existencia do evento
         EventosPK eventoID = new EventosPK();

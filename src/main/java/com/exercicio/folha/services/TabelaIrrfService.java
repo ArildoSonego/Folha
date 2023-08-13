@@ -23,12 +23,6 @@ public class TabelaIrrfService {
 
     public boolean existeCompetencia (LocalDate dataCompetencia){
         List <TabelaIrrfModel> listaFaixaIRRF = tabelaIrrf.buscaTabelaIRRF();
-        TabelaIrrfPK tabIRRF;
-        for (TabelaIrrfModel faixa: listaFaixaIRRF) {
-            tabIRRF = faixa.getTabelaIrrfID();
-            if (tabIRRF.getCodigoTabelaIRRF().isAfter(dataCompetencia))
-                return false;
-        }
-        return true;
-    }
+        return (!dataCompetencia.isBefore(listaFaixaIRRF.get(0).getTabelaIrrfID().getCodigoTabelaIRRF()));}
+
 }

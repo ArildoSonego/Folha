@@ -14,10 +14,6 @@ public class EventosService {
     @Autowired
     EventosRepository eventos;
 
-    public List<EventosModel> buscaTodos() {
-        return eventos.findAll();
-    }
-
     public void inclui(EventosModel eventoNovo) {
         eventos.save(eventoNovo);
     }
